@@ -1,0 +1,55 @@
+<div class="product-dialog">
+
+    <div class="close-btn-outer">
+      <button mat-mini-fab color="warn" (click)="close()"><mat-icon>close</mat-icon></button>
+    </div>
+  
+    <div class="title">
+      <h3>Liste de prix</h3>
+    </div>
+    <div class="register-body">
+      <form fxLayout="row wrap" (ngSubmit)="onSubmit(modiForm)" [formGroup]="modiForm">
+        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+          <span style="font-size: 1em"><b>Prix du produit:</b></span>
+          <mat-form-field class="w-100">
+              <input matInput placeholder="Le prix du produit"  formControlName="price" ngModel name="price">
+              <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+          <span style="font-size: 1em"><b>La devise du produit:</b></span>
+            <!-- <select formControlName="category" name="category" ngModel  class="w-100" style="border-top:0;border-radius: 5px;height: 40px ">
+              <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.name}}</option>
+            </select> -->
+            <mat-form-field class="w-100">
+                <input matInput placeholder="Le device du produit"  formControlName="devise" ngModel name="devise">
+                <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+            <span style="font-size: 1em"><b>Date de début valide:</b></span>
+            <mat-form-field class="w-100">
+                <input matInput placeholder="Entrer la date de début de validation" type="date" name="valid_from" formControlName="valid_from" required>
+                <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+            </mat-form-field>
+        </div>
+
+        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+            <span style="font-size: 1em"><b>Date de fin valide:</b></span>
+            <mat-form-field class="w-100">
+                <input matInput placeholder="Entrer la date de fin de validation" type="date" name="valid_to" formControlName="valid_to" required>
+                <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+            </mat-form-field>
+        </div>
+  
+          <div class="button-wrap mt-5" fxFlex="50" fxFlex.gt-sm="50" ngClass.sm="mt-1" ngClass.xs="mt-1">
+              <button class="btn-project" mat-raised-button color="accent" type="submit" style="background-color:#A2D0F2 !important">Modifier</button>
+          </div>
+          </form>
+    </div>
+  </div>
+  
+  
+  

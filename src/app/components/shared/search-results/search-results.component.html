@@ -1,0 +1,68 @@
+<app-header></app-header>
+
+    <div class="container">
+        <div class="mt-3">
+            <h3 class="text-center">Résultats de la recherche</h3>
+            <div class="py-5">
+                <div class="container">
+                  <p>Produits</p>
+                  <p *ngIf="productsResultsLength == true" style="color: tomato;">Aucun résultats trouvés !</p>
+                  <div class="row hidden-md-up" >
+                    <div class="col-md-4 mt-3" *ngFor="let result of productsResults">
+                      <div class="card" *ngIf="productsResults.length != 0; else elseBlockP">
+                        <div class="card-block mx-3">
+                          <h4 class="card-title">{{result.name}}</h4>
+                          <p class="card-text p-y-1">{{result.description}}</p>
+                          <h6 class="card-subtitle text-muted">{{result.price}}</h6>
+                          <a class="card-link mr-2" style="float: right; cursor: pointer;" (click)="openProductSearchDialog(result, result.id)">Voir plus</a>
+                        </div>
+                      </div>
+                      <!-- <ng-template #elseBlockP>
+                        <p style="color: tomato;">Aucun résultats trouvés !</p>
+                      </ng-template> -->
+                    </div>
+                  </div><br>
+                </div>
+
+                <div class="container">
+                    <p>Catégories</p>
+                    <p *ngIf="categoryResultsLength == true" style="color: tomato;">Aucun résultats trouvés !</p>
+                    <div class="row hidden-md-up">
+                      <div class="col-md-4 mt-3" *ngFor="let resultC of categoryResults">
+                        <div class="card" *ngIf="categoryResults.length != 0; else elseBlockC">
+                          <div class="card-block mx-3">
+                            <h4 class="card-title">{{resultC.name}}</h4>
+                            <p class="card-text p-y-1">{{resultC.description}}</p>
+                            <!-- <a href="#" class="card-link mr-2" style="float: right;">Voir plus</a> -->
+                          </div>
+                        </div>
+                        <!-- <ng-template #elseBlockC>
+                          <p style="color: tomato;">Aucun résultats trouvés !</p>
+                        </ng-template> -->
+                      </div>
+                    </div><br>
+                </div>
+
+                <div class="container">
+                  <p>Boutiques</p>
+                  <p *ngIf="shopResultsLength == true" style="color: tomato;">Aucun résultats trouvés !</p>
+                  <div class="row hidden-md-up" >
+                    <div class="col-md-4 mt-3" *ngFor="let resultS of shopResults">
+                      <div class="card" *ngIf="shopResults.length != 0; else elseBlockS">
+                        <div class="card-block mx-3">
+                          <h4 class="card-title">{{resultS.name}}</h4>
+                          <!-- <p class="card-text p-y-1">{{resultS.description}</p> -->
+                          <!-- <a href="#" class="card-link mr-2" style="float: right;">Voir plus</a> -->
+                        </div>
+                      </div>
+                      <!-- <ng-template>
+                        <p style="color: tomato;">Aucun résultats trouvés !</p>
+                      </ng-template> -->
+                    </div>
+                  </div><br>
+              </div>
+            </div>    
+        </div>
+    </div>
+
+<app-footer></app-footer>

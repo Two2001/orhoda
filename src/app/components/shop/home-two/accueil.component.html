@@ -1,0 +1,154 @@
+<app-header></app-header>
+
+<div class="carousel-2">
+    <div class="container ctn-box"  >
+      <div class="" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+          <div class="slider-categories" fxFlex="100" fxFlex.gt-md="25" fxFlex.md="40">
+              <div class="categories-wrap" >
+                  <div class="title">NOS CATEGORIES</div>
+                    <app-categories></app-categories>
+                    <div class="btn-sale">
+                        <button mat-raised-button color="primary" (click)="openCategorieModalDialog(p)" style="background-color:#A2D0F2 !important">Voir toute les Catégories</button>
+                    </div>
+                    </div>
+          </div>
+          <div class="carousel-2-wrapper" fxLayout.sm="column" fxFlex="100" fxFlex.gt-md="75" fxFlex.md="60" fxFlex.sm="100">
+              <app-main-carousel [slides]="slides"></app-main-carousel>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="home-2-wrap">
+      <div class="info-bar2-wrap">
+        <div class="container">
+          <div fxLayout="row wrap" class="info-bar">
+              <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50" *ngFor="let service of services">
+                  <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                    <mat-icon class="mat-icon-xlg  m-0" style="color:#A2D0F2 !important" >{{service.icone}}</mat-icon>
+                    <div class="content">
+                      <p>{{service.title}}</p>  
+                      <span class="text-muted m-0">{{service.description}}</span>
+                    </div>
+                  </mat-card>
+              </div>
+                <!-- <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+                  <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                    <mat-icon class="mat-icon-xlg  m-0">local_shipping</mat-icon>
+                    <div class="content">
+                      <p>LIVRAISON GRATUITE</p>
+                      <span class="text-muted m-0">Livraison gratuite sur toutes les commandes de plus de 99 $</span>
+                    </div>
+                  </mat-card>
+                </div>
+                <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+                  <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                    <mat-icon class="mat-icon-xlg m-0">monetization_on</mat-icon>
+                    <div class="content">
+                      <p>GARANTIE DE REMBOURSEMENT</p>
+                      <span class="text-muted m-0">Garantie de remboursement à 100%</span>
+                    </div>
+                  </mat-card>
+                </div>
+                <div class="card-wrap" fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+                  <mat-card class="light-block" fxLayout="row"  fxLayoutAlign="start center">
+                    <mat-icon class="mat-icon-xlg m-0">history</mat-icon>
+                    <div class="content">
+                      <p>SUPPORT EN LIGNE 24/7</p>
+                      <span class="text-muted m-0">Appelez-nous: 02 3555 65454 55</span>
+                    </div>
+                  </mat-card>
+                </div> -->
+          </div>
+
+        </div>
+      </div>
+      <div >
+        <div class="products sec-padding">
+          <div class="container">
+              <mat-tab-group>
+
+                <mat-tab label="PRODUITS EN PROMO" >
+
+                  <app-product-carousel-two style="color:#A2D0F2 !important"></app-product-carousel-two>
+                  <!-- <app-product-carousel-last-product ></app-product-carousel-last-product> -->
+
+                </mat-tab>
+                </mat-tab-group>
+          </div>
+
+        </div>
+        <div class="products sec-padding">
+          <div class="container" style="margin-top: -80px !important;">
+              <mat-tab-group>
+
+                <!-- <mat-tab label="PRODUITS EN PROMO">
+
+                  <app-product-carousel-two ></app-product-carousel-two>
+                  <app-product-carousel-last-product ></app-product-carousel-last-product>
+
+                </mat-tab> -->
+
+
+                  <mat-tab label="NOUVEAUX PRODUITS">
+
+                          <app-product-carousel-last-product ></app-product-carousel-last-product>
+
+                  </mat-tab>
+
+                  <!-- <mat-tab  label="PRODUITS POPULAIRES">
+
+                    <app-product-carousel-two></app-product-carousel-two>
+
+
+                  </mat-tab> -->
+
+                  
+
+                </mat-tab-group>
+          </div>
+
+        </div>
+        <div class="products sec-padding">
+          <div class="container" style="margin-top: -80px !important;">
+              <mat-tab-group>
+
+                <!-- <mat-tab label="PRODUITS EN PROMO">
+
+                  <app-product-carousel-two ></app-product-carousel-two>
+                  <app-product-carousel-last-product ></app-product-carousel-last-product>
+
+                </mat-tab> -->
+
+
+                  <!-- <mat-tab label="NOUVEAUX PRODUITS">
+
+                          <app-product-carousel-last-product ></app-product-carousel-last-product>
+
+                  </mat-tab> -->
+
+                  <mat-tab  label="PRODUITS POPULAIRES">
+
+                    <app-product-carousel-two></app-product-carousel-two>
+
+
+                  </mat-tab>
+
+                  
+
+                </mat-tab-group>
+          </div>
+
+        </div>
+      </div>
+        <div class="banners-wrap">
+            <div class="container">
+                <app-adds></app-adds>
+            </div>
+        </div>
+        <div class="products-vertical-wrap">
+            <div class="container">
+                <app-product-vertical [products]="products"></app-product-vertical>
+            </div>
+        </div>
+</div>
+

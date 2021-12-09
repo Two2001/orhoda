@@ -1,0 +1,142 @@
+<app-header-two></app-header-two>
+
+<div class="about-us-wrapper">
+    <div class="container">
+        <div class="about-section sec-padding" fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlex="100" *ngIf="user.avatar_original === null " fxFlex.gt-sm="50" class="left-info-panel">
+                <img src="assets/images/about-us/aboutUs.jpg" alt="">
+            </div>
+            <div fxFlex="100" fxFlex.gt-sm="35" class="product-img blog" *ngIf="user.avatar_original != null" style="height: 300px;overflow-y: hidden;">
+                <img [src]="'http://192.168.1.110:8000/' + user.avatar_original" alt="" style="width: 100%; height: 100%">
+            </div>
+            
+            <div style="position: absolute" *ngIf="user.avatar_original === null">
+                <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" style="background-color:#A2D0F2 !important">
+                    Choisissez un profil
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">image</mat-icon>
+                    <input type="file" style="position: absolute;opacity: 0; margin-left: -190px;padding-bottom:18px;" (change)="imageChangeEvent($event, p)" name="image" class="fileInputProfile" >
+                   
+                </button>
+            </div>
+            <!-- <p>{{user.images}}</p> -->
+            
+
+            
+
+
+
+            <div fxFlex="100" fxFlex.gt-sm="50" style="margin-left: 2rem;" class="left-info-panel">
+                <div class="about-us-intro">
+                    <h2>{{user.first_name}} {{user.last_name}} <button class="btn-project" mat-raised-button color="red" style="background-color:rgb(248, 171, 166) !important; color:white; margin: 10px;padding: 10px" (click)="deconnexion()">Déconnexion</button><mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="margin-left: 4rem; cursor: pointer" (click)="openProfilDialog()">build</mat-icon></h2>
+                    <p>
+                        <b>E-mail : </b> <span *ngIf="user.email;else addEmail"> {{user.email}}</span><br/>
+                        <ng-template #addEmail> <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" (click)="openProfilDialog()">Ajouter</button></ng-template>
+                        <b>Téléphone : </b> <span *ngIf="user.phone;else addphone"> {{user.phone}}</span><br/>
+                        <ng-template #addphone> <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" (click)="openProfilDialog()">Ajouter</button></ng-template>
+                        <!-- <b>Mobile : </b> <span *ngIf="user.mobile;else addMobile"> {{user.mobile}}</span><br/>
+                        <ng-template #addMobile> <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" (click)="openProfilDialog()">Ajouter</button></ng-template> -->
+                        <b>Numéros de pièce d'identité : </b> <span *ngIf="user.cni;else addCni"> {{user.cni}}</span><br/>
+                        <ng-template #addCni> <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" (click)="openProfilDialog()">Ajouter</button></ng-template>
+                        <b>Date de naissance : </b> <span *ngIf="user.birthday;else addBirthday"> {{user.birthday}}</span><br/>
+                        <!-- <b>Date de naissance : </b> <span *ngIf="user.birthday;else addBirthday"> {{user.birthday.timestamp * 1000 | date: 'dd/MM/yyyy'}}</span><br/> -->
+                        <ng-template #addBirthday> <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" (click)="openProfilDialog()">Ajouter</button></ng-template>
+                        <b>Adresse : </b> <span *ngIf="user.address;else addAdresse"> {{user.address}}</span><br/>
+                        <ng-template #addAdresse> <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" (click)="openProfilDialog()">Ajouter</button></ng-template>
+                        <b>Mot de passe : <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px; background-color:#A2D0F2 !important" (click)="openResetPasswordDialog()">Changer</button></b>
+                    </p>
+                    <button *ngIf="user.avatar_original != null" class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px; background-color:#A2D0F2 !important">
+                        Mettre à jour votre photo de profil
+                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">image</mat-icon>
+                        <input type="file" style="position: absolute;opacity: 0; margin-left: -190px;padding-bottom:18px;" (change)="imageUpdateChangeEvent($event, p)" name="image" class="fileInputProfile" >
+                    </button>
+                    <p style="font-size: 16px; color: green; text-align: center; margin-top: 15px; margin-bottom: 10px;" *ngIf="shopDecision.has_shop == true && shopDecision.approval == false">Votre boutique a été bien créée. Veuillez contacter Orhoda pour l'activation de votre compte</p>
+                    <button class="ped-btn-footer" *ngIf="shopDecision.has_shop == false;else voirProfil" class="btn-project" mat-raised-button color="accent" style="width: 100%; background-color:#A2D0F2 !important" (click)="goToCreateShop()" >CREER VOTRE BOUTIQUE</button>
+                    <ng-template #voirProfil>
+                        <button class="ped-btn-footer" *ngIf="shopDecision.approval == true" class="btn-project" mat-raised-button color="accent" style="width: 100%; background-color:#A2D0F2 !important" (click)="goToShop()">VOIR MA BOUTIQUE</button>
+                    </ng-template>
+                    <button class="ped-btn-footer" class="btn-project" mat-raised-button color="accent" style="width: 100%; margin-top: 10px; background-color:#A2D0F2 !important" (click)="goToMyOrdered()">VOIR MES COMMANDES</button>
+                    <button *ngIf="shopDecision.approval == true" class="ped-btn-footer" class="btn-project" mat-raised-button color="accent" style="width: 100%; margin-top: 10px; background-color:#A2D0F2 !important" (click)="goToOrdered()">VOIR LES COMMANDES DES ACHETEURS</button>
+                    
+                    <div class="accordions">
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <h4>Comment devenir partenaire?</h4>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <p>Nulla ac accumsan urna. Praesent id leo ut velit tempor gravida. Nulla facilisi. Nam blandit rhoncus lectus, eu euismod diam rhoncus et.
+                                    In sollicitudin bibendum odio, at tristique purus elementum sit amet. Integer vulputate, justo at lacinia suscipit, erat nibh interdum augue, sit amet hendrerit neque ipsum at eros.</p>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <h4>Vendre vos produits sur notre plateform</h4>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <p>Nulla ac accumsan urna. Praesent id leo ut velit tempor gravida.
+                                    In sollicitudin bibendum odio, at tristique purus elementum sit amet. Integer vulputate, justo at lacinia suscipit, erat nibh interdum augue, sit amet hendrerit neque ipsum at eros.</p>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <h4>Certfié vos produits</h4>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <p>Nulla ac accumsan urna. Praesent id leo ut velit tempor gravida. Nulla facilisi. Nam blandit rhoncus lectus, eu euismod diam rhoncus et.
+                                    In sollicitudin bibendum odio, at tristique purus elementum sit amet. </p>
+                            </mat-expansion-panel>
+
+                        </mat-accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="our-values sec-padding">
+        <div class="container">
+            <div class="title-wrapper">
+                <h2>Nos excellents services</h2>
+                <p>Orhoda a plus de 2 ans d'expérience dans la fourniture d'un large éventail de services spécialisés énumérés ci-dessous.
+                </p>
+            </div>
+            <div fxLayout="row" fxLayout.lt-sm="column" class="box-wraper">
+                <div fxFlex="100" fxFlex.gt-sm="33.3" class="box">
+                    <div class="content">
+                        <div class="icon-box">
+                            <i class="material-icons" style="color:#A2D0F2 !important">
+                                done_all
+                            </i>
+                        </div>
+                        <h4>BONUS PLUS</h4>
+                        <p>Obtenez un bonus en achetant plus de trois produits'</p>
+                    </div>
+                </div>
+                <div fxFlex="100" fxFlex.gt-sm="33.3" class="box">
+                    <div class="content">
+                        <div class="icon-box">
+                            <i class="material-icons" style="color:#A2D0F2 !important">
+                                build
+                            </i>
+                        </div>
+                        <h4>GARANTIE DE REMBOURSEMENT</h4>
+                        <p>Garantie de remboursement <br> à 100%
+                        </p>
+                    </div>
+                </div>
+                <div fxFlex="100" fxFlex.gt-sm="33.3" class="box">
+                    <div class="content">
+                        <div class="icon-box">
+                            <i class="material-icons" style="color:#A2D0F2 !important">
+                                local_shipping
+                            </i>
+                        </div>
+                        <h4>LIVRAISON GRATUITE</h4>
+                        <p>Livraison gratuite sur toutes les commandes de plus de 100000 FCFA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

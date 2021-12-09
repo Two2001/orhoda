@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico')
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono')
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro')
+@import url('https://fonts.googleapis.com/css?family=Ubuntu')
+
+
+  
+// fonts
+$pacifico      : 'Pacifico', cursive
+$shareTechMono : 'Share Tech Mono', monospace
+$sourceSansPro : 'Source Sans Pro', sans-serif
+$ubuntu        : 'Ubuntu', sans-serif
+
+
+.hideLoader 
+    display: none
+
+
+						
+					
+				
+
+
+
+
+*
+*:before
+*:after
+    box-sizing inherit
+    
+h1
+  text-align center
+
+.banner
+    border-radius: 15px
+    box-shadow: 0 1px 4px rgba(0,0,0,0.5)
+    height: 100px
+    margin: 20px auto
+    padding: 20px
+    width: 620px
+
+    &.banner0
+        background-color: darken(cadetblue, 32%)
+        background-image: url('http://www.pngmart.com/files/5/City-PNG-Transparent.png')
+        background-position bottom center
+        background-size: 50%
+    &.banner1
+        background-color Moccasin
+        background-image: url('http://icons.veryicon.com/ico/Holiday/Swarm%20App%20Sticker/Coffee.ico')
+        background-position center left
+        background-repeat no-repeat
+        background-size contain
+        color Chocolate
+        font-family: $pacifico
+        padding-left: 100px
+        h2
+          line-height: 32px
+          font-weight normal
+          text-shadow: 0 0 0 transparent
+    
+
+h2
+    margin: 0
+    padding: 0
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25)
+
+.slogan
+    font-size: 1.111em 
+    margin: 0
+
+.pagination 
+a 
+    color: black 
+    float: left 
+    padding: 8px 16px 
+    text-decoration: none 
+    transition: background-color .3s 
+    &.active 
+        background-color: dodgerblue 
+        color: white 
+    &:hover 
+        &:not(.active) 
+            background-color: #ddd 
+
+
+
+

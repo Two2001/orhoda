@@ -1,0 +1,60 @@
+<style>
+   a:hover {
+       background-color: #A2D0F2 !important;
+   }
+</style>
+
+<div class="product-item swiper-container" [swiper]="config" >
+    <div class="swiper-wrapper h-100" >
+      <div fxLayout="column" style="text-align: center" fxLayoutAlign="space-around center" *ngIf="lastProducts.length == 0">
+         <mat-chip-list >
+            <mat-chip color="warn" selected="true" style="background-color: #A2D0F2 !important; ">Il n'y a pas de produit pour le moment.</mat-chip>
+         </mat-chip-list>
+      </div>
+        <div *ngFor="let products of lastProducts " class="swiper-slide" >
+           <!-- <div  *ngIf="products.isDeleted == false; else elseDiv" [className]="(products.isDeleted == true) ? 'hidden' : ''"></div> -->
+            <div>
+              <div>
+               <mat-card fxLayout="column">
+                  <div class="product-img">
+                      <a class="product-link" [routerLink]="['/home/product', products.id]">
+                        <img [src]="products.pictures" alt="">
+                     </a>
+                  </div>
+                   <div class="product-info-wrapper">
+                      <!-- <span class="category">{{products.category}}</span> -->
+                      <div class="title-wrap">
+                         <h4>{{products.name}}</h4>
+                      </div>
+                      <div class="stars" *ngIf="products.rating.length == 0">
+                         <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                         <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                         <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                         <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                         <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                      </div>
+                        <div class="stars" *ngIf="products.rating.length > 0">
+                           <mat-icon *ngFor="let rate of products.rating" class="mat-icon-xs mat-icon material-icons ng-star-inserted">{{rate}}</mat-icon>
+                        </div>  
+                      
+                     <!-- <h1 ng-repeat="x in 4">llll{{x}}</h1> -->
+                      <div class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+                       <p>{{products.price | number : '1.2-2'}}FCFA</p>
+                      <a (click)="addToCart(products)"><mat-icon class="mat-icon-lg mat-icon material-icons" >shopping_cart</mat-icon></a>
+                      </div>
+                      <div class="icons" fxLayout="column">
+                         <!-- <a (click)="addToWishlist(product)"><mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon></a> -->
+                         <a (click)="openProductDialog(products, products.id)"><mat-icon style="color:#A2D0F2 !important">remove_red_eye</mat-icon></a>
+                         <!-- <a (click)="addToCompare(product)"><mat-icon>cached</mat-icon></a> -->
+                       </div>
+                   </div>
+              </mat-card>
+              </div>
+            </div>
+            <!-- <ng-template #elseDiv style="visibility: hidden;"></ng-template> -->
+        </div>
+
+    </div>
+    <!-- <button mat-mini-fab class="swiper-button-prev swipe-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <button mat-mini-fab class="swiper-button-next swipe-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button> -->
+  </div>

@@ -1,0 +1,41 @@
+
+<app-header></app-header>
+<div class="my-account sec-padding">
+    <div class="container">
+        <mat-card fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center"  class="p-2" style="margin-bottom: 15px;">
+            <div class="my-account-wrap p-0" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center" >
+                
+                <div class="register-wrapper pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
+                      <div class="title">
+                          <h3>Ajout de catégorie</h3>
+                        </div>
+                        <div class="register-body">
+                          <form fxLayout="row wrap" (ngSubmit)="onSubmit(f)" #f="ngForm">
+                            <p style="color: tomato" *ngIf="isCreated === false"> {{ errorMessage }} </p>
+                            <p style="color: green" *ngIf="isCreated === true"> {{ successMessage }} </p>
+                            <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                              <mat-form-field class="w-100">
+                                  <input matInput placeholder="Entrez le nom de la catégorie" #name="ngModel" ngModel name="name" required>
+                                  <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error>
+                              </mat-form-field>
+                            </div>
+
+                            <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                              <mat-form-field class="w-100">
+                                  <input matInput placeholder="Entrez la description de la catégorie" #name="ngModel" ngModel name="description" required>
+                                  <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error>
+                              </mat-form-field>
+                            </div>
+  
+                              <p>Vos données personnelles seront utilisées pour soutenir votre expérience sur ce site Web, pour gérer l'accès à votre boutique et à d'autres fins décrites dans notre politique de confidentialité.</p>
+                              <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                  <button class="btn-project" mat-raised-button color="accent" type="submit" style="background-color:#A2D0F2 !important">Ajouter</button>
+                                </div>
+                          </form>
+                        </div>
+                </div>
+          </div>
+        </mat-card>
+  
+    </div>
+</div>

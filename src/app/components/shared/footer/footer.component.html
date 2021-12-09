@@ -1,0 +1,85 @@
+<footer class="footer sec-padding">
+  <div class="container">
+      <div class="footer-wrapper" fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <div fxFlex="100" fxFlex.gt-sm="30" fxFlex.sm="50" class="footer-widget about-widget"><a class="logo" href="index.html"><img src="assets/images/orhoda.jpeg" height="95" width="95" alt="orhoda_logo"></a>
+          <p>ORHODA est une plateforme de vente et d'achat de produits en ligne.Nous proposons des produits 100% fabriqués en Afrique</p>
+          <!-- <div class="link"><a href="#">MORE ABOUT US</a> </div> -->
+        </div>
+
+          <div fxFlex="100" fxFlex.gt-sm="23" fxFlex.sm="50" ngClass.xs="mt-2" style="margin-left: 10px;" class="footer-widget links-widget links-widget-pac">
+            <div class="title">
+              <h5>Lien utile</h5>
+            </div>
+            <div class="row">
+                <ul>
+                  <li><a [routerLink]="['/pages/signup']" style="color: black;">
+                    Inscription
+                  </a></li>
+                </ul>
+            </div>
+          </div>
+
+
+        <div fxFlex="100" fxFlex.gt-sm="23" fxFlex.sm="50" ngClass.xs="mt-2" class="footer-widget subscribe-widget">
+          <div class="title">
+            <h5>Abonnez-vous à la newsletter</h5>
+          </div>
+          <form action="#">
+            <p>Obtenez les dernières mises à jour et offres.</p>
+            <div fxLayout="column" class="newsletter-widget">
+              <input
+              matInput
+              placeholder="Enter your email address"
+              (keyup.enter)="addNewsletter()"
+              (change)="change($event)"
+            />
+             <input type="text" placeholder="Rechercher..." style="display: none;" (keydown.enter)="addNewsletter()" id="search" (change)="change($event)">
+              <!-- <input type="text" 
+              placeholder="Enter your email address"
+              (keyup.enter)="addNewsletter()"
+              (change)="change($event)"
+              > -->
+              <button type="button" (click)="addNewsletter()" class="ped-btn-footer" style="background-color:#A2D0F2 !important; border: #A2D0F2 !important;">INSCRIVEZ-NOUS</button>
+            </div>
+          </form>
+        </div>
+
+          <div fxFlex="100" fxFlex.gt-sm="23" fxFlex.sm="50" ngClass.sm="mt-2" ngClass.xs="mt-2" class="footer-widget subscribe-widget">
+            <div class="title">
+              <h5>Contacts</h5>
+            </div>
+            <div fxLayout="row" class="tel-box">
+              <div class="icon"><i class="fa fa-map-marker"></i></div>
+              <div class="text">
+                <p>Vedoko Cotonou</p>
+              </div>
+            </div>
+            <div fxLayout="row" class="tel-box">
+              <div class="icon"><i class="fa fa-phone"></i></div>
+              <div class="text">
+                <p>00229 61483323 </p>
+              </div>
+            </div>
+            <div fxLayout="row" class="tel-box">
+              <div class="icon"><i class="fa fa-envelope"></i></div>
+              <div class="text">
+                <p><a href="#">contact@orhoda.com</a></p>
+              </div>
+            </div>
+
+            <ul fxLayout="row" class="social list-inline">
+              <!-- <li><a href="https://wwww.facebook.com/Orhoda-Afrique-105380801391047"><i class="fa fa-facebook"></i></a></li> -->
+              <!-- <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-google-plus"></i></a></li> -->
+            </ul>
+          </div>
+
+
+
+
+
+
+      </div>
+  </div>
+</footer>

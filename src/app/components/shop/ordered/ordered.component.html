@@ -1,0 +1,186 @@
+<style>
+    .image-wrap {
+        padding: 10px;
+        border: solid 1px #e0e0e0;
+        display: inline-block;
+    }
+
+    .img-space {
+        border: dashed 1px #d3d3d3;
+        border-radius: 8px;
+        background-color: #f2f2f2;
+        height: auto;
+
+        /*width: 100%;*/
+        /*padding: 10px;*/
+        /*min-height:175px;*/
+    }
+
+    .img-space img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        cursor: pointer;
+    }
+
+    .fileInputProfileWrap {
+        width: 100%;
+        height: auto;
+    }
+
+    .fileInputProfile {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 99;
+        opacity: 0;
+    }
+    .fileInputProfile[disabled] + .img-space{
+        pointer-events: none;
+        cursor: not-allowed!important;
+    }
+
+    
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    
+    .contain:hover .blog {
+        opacity: 0.3;
+    }
+    
+    .contain:hover .middle {
+        opacity: 1;
+    }
+    @media only screen and (max-width: 1440px) {
+        .button-text {
+           display: none;
+        }
+    }
+</style>
+<app-header></app-header>
+<div>
+<div fxFlex="100" fxFlex.sm="60" fxFlex.gt-sm="85" class="main-blog-panel"  style="margin: auto !important;">
+    <!-- <p>isActived:  {{shop.isActived}} </p> -->
+    
+    <div *ngIf="shop.is_active == true;then show else hide"></div>
+
+    <ng-template #show>
+        <div class="banner banner1" style="width: 90% !important;background-color: white !important" >
+            <h2>{{shop.name}}</h2>
+            <p class="slogan" style="margin-top: 18px !important" *ngIf="shop.slogan;else addSlogan">{{ shop.slogan}}</p>
+            <ng-template #addSlogan>
+                <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px;  background-color:#A2D0F2 !important">Ajouter un slogan</button>
+            </ng-template >
+            <!-- <div style="float: right !important;">
+                <p *ngIf="countProduct == 0;else addProduct"> Vous n'avez reçu aucun commande<button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" (click)="goToAddForm()">Ajouter un produit</button>
+                </p>
+                <ng-template #addProduct>
+                    <p> Vous avez {{ countProduct }} commande(s)         
+                    </p>
+                </ng-template >
+            </div> -->
+        </div>
+    
+        <div class="col-sm-12 empty-cart-cls text-center" *ngIf="countProduct == 0">
+            <img src="assets/images/backet-01.png" class="img-fluid mb-4" >
+            <h3 class="mb-5"><strong>Votre page commande est vide</strong></h3>
+        </div>
+    
+       <div>
+            <div class="blog-container" fxLayout.gt-sm="row" *ngFor="let line of productLine ">
+                <div class="product-item contain"  *ngFor="let p of line " style="margin:10px !important;width: 25% !important">
+                    <mat-card fxLayout="column" *ngIf="p != null">
+                       
+                        
+
+                        <div class="product-info-wrapper">
+
+                           
+
+                            <!-- <span class="category">{{p.product.category.name}}</span> -->
+                            <div class="title-wrap">
+                                <h4>{{p.products.name}}</h4>
+                            </div>
+                            
+                            
+                            <div class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+                                <p>{{p.products.price}} {{currency}}</p>
+                            </div>
+                            <div class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+                                <p>Quantité commandée: <span style="margin-left: 5px;">{{p.quantity}}</span></p>
+                                
+                            </div>  
+
+                            <div *ngIf="p.delivery_status == 'delivered';else refuse;" class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+                                <p>Etat de livraison: <span style="color: green;">{{acceptMessage}}</span></p>
+                            </div>
+                            
+                            <ng-template #refuse>
+                                <div *ngIf="p.delivery_status == 'pending';else nullM;" class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+                                    <p>Etat de livraison: <span style="color: tomato;">{{refuseMessage}}</span></p>
+                                </div>
+                            </ng-template>
+
+                            <div *ngIf="p.delivery_status == 'cancelled';else nullM;" class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+                                <p>Etat de livraison: <span style="color: tomato;">{{refusesMessage}}</span></p>
+                            </div>
+
+                            <ng-template #nullM></ng-template>
+
+                            <div  *ngIf="p.is_active == true ; else bN" class="icons" fxLayout="column" style="margin-top: 10px">
+                                <div style="display: inline-block;">
+                                    <div style="float: left">
+                                        <button  class="btn" mat-raised-button color="accent" style="background-color: #2F8496" (click)="accept(p.id)">
+                                            <span class="button-text">Livrer</span>
+                                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">done outline icon</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div style="float: right">
+                                        <button  class="btn" mat-raised-button color="accent" style="background-color: red" (click)="refuseOrder(p.id)">
+                                            <span class="button-text">Refuser</span>
+                                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">clear</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ng-template #bN>
+                                <!-- <div *ngIf="p.isAccepted != false">
+
+                                </div> -->
+                            </ng-template>
+                        </div>
+                        
+                    </mat-card>
+                </div>
+            </div>
+       </div>
+    
+    
+        <div style="display: flex;justify-content: center; margin-top: 2rem; margin-bottom:18px">
+            <div class="pagination">
+                <a (click)="previousPage()"  style="cursor:default">&laquo;</a>
+                <a *ngFor="let p of countPage; let i = index;" (click)="showpProductsPage(i + 1)">
+                    <b style="cursor:default" [ngStyle]="{'color': i+1 === currentPage ? 'orange' : 'black' }">{{i + 1}}</b>
+                </a>
+                <a (click)="nextPage()"  style="cursor:default">&raquo;</a>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #hide >
+        <div style="margin-top: 40px; text-align: center; margin-bottom: 40px">
+            <p><b style="font-size: 28px;">Votre boutique est désactivée !</b></p>
+        </div>
+    </ng-template>
+
+</div>

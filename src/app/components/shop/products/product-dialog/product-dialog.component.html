@@ -1,0 +1,71 @@
+<div class="product-dialog">
+
+  <div class="close-btn-outer">
+    <button mat-mini-fab color="warn" (click)="close()"><mat-icon>close</mat-icon></button>
+  </div>
+
+  <div class="title">
+    <h3>Modification du produit</h3>
+  </div>
+  <div class="register-body">
+    <form fxLayout="row wrap" (ngSubmit)="onSubmit(modiForm)" [formGroup]="modiForm">
+      <div  fxFlex="70" fxFlex.gt-sm="70" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+        <span style="font-size: 1em"><b>Nom du produit:</b> {{ product.name }}</span>
+        <mat-form-field class="w-100">
+            <input matInput placeholder="Modifier le nom du produit"  formControlName="name" ngModel name="name">
+            <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div  fxFlex="30" fxFlex.gt-sm="30" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+        <span style="font-size: 1em"><b>Catégorie du produit:</b> {{ product.category.name }}</span>
+          <select formControlName="category" name="category" value="{{product.category.name}}" ngModel  class="w-100" style="border-top:0;border-radius: 5px;height: 40px ">
+            <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.name}}</option>
+          </select>
+      </div>
+
+      <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+        <span style="font-size: 1em"><b>Description du produit:</b> {{ product.description }}</span>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Modifier la decription du produit"  formControlName="description" ngModel name="description">
+          <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div  fxFlex="50" fxFlex.gt-sm="50" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+        <span  class="w-100"style="font-size: 1em"><b>Quantité produit:</b> {{ product.currentstock }}</span>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Modifier la quantité du produit"  value="{{ product.currentstock }}" formControlName="currentstock" ngModel name="currentstock">
+          <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div  fxFlex="50" fxFlex.gt-sm="50" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+        <span  class="w-100"style="font-size: 1em"><b>Prix du produit:</b> {{ product.price }}</span>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Modifier le prix du produit"  formControlName="price" ngModel name="price">
+          <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div  fxFlex="50" fxFlex.gt-sm="50" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+        <span  class="w-100"style="font-size: 1em"><b>Prix du produit en promotion:</b> {{ product.strokedprice }}</span>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Modifier le prix du produit en promotion"  formControlName="strokedprice" ngModel name="strokedprice">
+          <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+        </mat-form-field>
+      </div>
+
+
+        <div class="button-wrap mt-5" fxFlex="50" fxFlex.gt-sm="50" ngClass.sm="mt-1" ngClass.xs="mt-1">
+            <button class="btn-project" mat-raised-button color="accent" type="submit" style="background-color:#A2D0F2 !important">Modifier</button>
+        </div>
+        <!-- <div class="button-wrap mt-5" fxFlex="50" fxFlex.gt-sm="50" ngClass.sm="mt-1" ngClass.xs="mt-1">
+            <button class="btn-project" mat-raised-button color="accent" (click)="openDialog(p, id)">Gerer la liste de prix</button>
+            <button class="btn-project" mat-raised-button color="accent" type="button">Gerer les images</button>
+        </div> -->
+        </form>
+  </div>
+</div>
+
+

@@ -1,0 +1,89 @@
+<div class="vertical-products sec-padding">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start" class="p-0">
+      <div fxFlex="100" fxFlex.gt-xs="33.3" class="product-panel">
+        <div class="widget-column">
+            <div class="title">
+                <h4 class="widget-title">Nouveaux produits</h4>
+              </div>
+              <ul class="product-list">
+                <li *ngFor="let prod of productsAll  " fxLayout="row">
+                  <!-- <div class="media-image" *ngIf="prod.images[0].image64">
+                    <img class="card-img" [src]="prod.images[0].image64" width="100%" height="100%" alt="">
+                  </div> -->
+                  <div class="media-body">
+                    <a style="cursor: pointer;" (click)="openModalProduct1(prod, prod.id)"><span>{{prod.name}}</span></a>
+                    <div class="stars" *ngIf="prod.rating.length == 0">
+                      <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                      <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                      <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                      <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                      <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                   </div>
+                     <div class="stars" *ngIf="prod.rating.length > 0">
+                        <mat-icon *ngFor="let rate of prod.rating" class="mat-icon-xs mat-icon material-icons ng-star-inserted">{{rate}}</mat-icon>
+                     </div>  
+                     <p class="price">{{prod.price | number : '1.2-2' }}</p>
+                  </div>
+                </li>
+              </ul>
+        </div>
+      </div>
+      <div fxFlex="100" fxFlex.gt-xs="33.3" class="product-panel">
+          <div class="widget-column">
+              <div class="title">
+                  <h4 class="widget-title">Meilleurs ventes</h4>
+                </div>
+                <ul class="product-list">
+                  <li *ngFor="let product of products " fxLayout="row">
+                    <div class="media-image">
+                      <a [routerLink]="['/home/product', product.id]"><img [src]="product.pictures[0].big" class="small" alt=""> </a>
+                    </div>
+                    <div class="media-body">
+                      <a [routerLink]="['/home/product', product.id]"><span>{{product.name}}</span></a>
+                      <div class="stars" *ngIf="product.rating.length == 0">
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                     </div>
+                       <div class="stars" *ngIf="product.rating.length > 0">
+                          <mat-icon *ngFor="let rate of product.rating" class="mat-icon-xs mat-icon material-icons ng-star-inserted">{{rate}}</mat-icon>
+                       </div>  
+                       <p class="price">{{product.price | number : '1.2-2'}}</p>
+                    </div>
+                  </li>
+                </ul>
+          </div>
+        </div>
+        <div fxFlex="100" fxFlex.gt-xs="33.3" class="product-panel">
+            <div class="widget-column">
+                <div class="title">
+                    <h4 class="widget-title">Choix de l'équipe</h4>
+                  </div>
+                  <ul class="product-list">
+                    <li *ngFor="let product of productsChoice  " fxLayout="row">
+                      <!-- <div class="media-image">
+                        <img class="card-img" [src]="product.images[0].image64" width="100%" height="100%" alt="">
+                        <a ><img [routerLink]="['/home/product', product.id]" [src]="product.pictures[0].big" class="small" alt=""> </a>
+                      </div> -->
+                      <div class="media-body">
+                       <a style="cursor: pointer;" (click)="openModalProduct(product, product.id)"><span>{{product.name}}</span></a>
+                       <div class="stars" *ngIf="product.rating.length == 0">
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                     </div>
+                       <div class="stars" *ngIf="product.rating.length > 0">
+                          <mat-icon *ngFor="let rate of product.rating" class="mat-icon-xs mat-icon material-icons ng-star-inserted">{{rate}}</mat-icon>
+                       </div>  
+                         <p class="price">{{product.price | number : '1.2-2'}}</p>
+                      </div>
+                    </li>
+                  </ul>
+            </div>
+          </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="profil-dialog">
+
+    <div class="close-btn-outer">
+        <button mat-mini-fab color="warn" (click)="close()" style="float: right; margin-right: -25px; margin-top: -35px"><mat-icon>close</mat-icon></button>
+    </div>
+ 
+    <div class="title">
+        <h4>Détail de la Commande</h4>
+    </div>
+    
+    <div>
+       <div class="register-body">
+         <div class="container" xFlex="100" fxFlex.gt-sm="100" class="left-info-panel">
+            <div class="row">
+              <div>
+                <div class="card" style="width: 400px ;height: 280px">
+                  <!-- <img src="assets/images/about-us/aboutUs.jpg" alt="" *ngIf="product.products.photos == null" width="100%" height="280px">
+                  <img class="card-img" [src]="'http://192.168.1.110:8000/' + product.products.photos.file_name" *ngIf="product.products.photos != null" width="100px" height="280px" alt=""> -->
+                  <div class="card-img-overlay d-flex justify-content-end">
+                    <a href="#" class="card-link text-danger like">
+                      <i class="fas fa-heart"></i>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title">Nom du produit: {{product.products.name}}</h4>
+                    <!-- <h6 class="card-subtitle mb-2 text-muted">{{product.category.name}}</h6> -->
+                    <p class="card-text">
+                      Description du produit: {{product.products.description}}</p>
+                    <!-- <div class="options d-flex flex-fill">
+                     <div  class="quantity text-center">
+                        <span class="text-muted fw-500"><b>Nombre d'étoiles</b></span>
+                        <div fxLayout="row" fxLayout.xs="column"  class="text-muted mt-2">
+                           <div fxLayout="row" fxLayoutAlign="center start">
+                              <button mat-icon-button matTooltip="Remove" (click)="decrement()">
+                                 <mat-icon>remove</mat-icon>
+                              </button>
+                              <input type="text" name="quantity" value="{{counter}}" (change)="change($event)" class="form-control input-number">
+                              <button mat-icon-button matTooltip="Add" (click)="increment()">
+                                 <mat-icon>add</mat-icon>
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                    </div> -->
+                    <div class=" d-flex justify-content-between align-items-center">
+                      <div class="price text-success"><h5 class="mt-4">Prix du produit: {{product.products.price}}</h5></div>
+                       <!-- <button class="btn btn-danger btn-lg mt-3" mat-icon-button  type="button" (click)="racing()">Noter le produit</button> -->
+                       <!-- <button type="button" class="btn btn-outline-dark" (click)="rating()" style="width: 4rem;" mat-icon-button>Noter</button> -->
+                    </div>
+                    <p class="card-text">Email: {{product.products.description}}</p>
+                    <p class="card-text">Téléphone: {{product.products.description}}</p>
+                    <p class="card-text">Adresse: {{product.products.description}}</p>
+                    <p class="card-text">Pays: {{product.products.description}}</p>
+                    <p class="card-text">Ville: {{product.products.description}}</p>
+                    <p class="card-text">Code postal: {{product.products.description}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
+    </div>
+ </div>
+  
+ 
+ 
+ 
+ 

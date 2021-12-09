@@ -1,0 +1,55 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav [opened]="false" mode="over"  #start  class="sidenav">
+        <button mat-icon-button color="warn" class="close" (click)="start.close()">
+          <mat-icon color="warn">close</mat-icon>
+        </button>
+        <div class="divider"></div>
+        <div class="sidebar-items" fxLayout="column" >
+            <app-sidebar *ngFor="let item of navItems" [item]="item"></app-sidebar>
+        </div>
+    </mat-sidenav>
+    <mat-toolbar class="main-topbar" [ngClass]="{topbar_four: url == '/home/four'}">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" class="top-bar container" >
+                <span fxHide="false" fxHide.gt-sm   >
+                    <button mat-icon-button (click)="start.toggle()">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                 </span>
+              <div fxLayout="row" class="welcome-message">
+                <div class="widget-text">
+                  <a mat-button >
+                    <span fxShow="false" fxShow.gt-sm class="flag-menu-title" *ngIf="!isAuth; else bienvenue">Bienvenue cher visiteur! </span>
+                      <ng-template #bienvenue>
+                          <span fxShow="false" fxShow.gt-sm class="flag-menu-title">Bienvenue {{ user.first_name }} {{ user.last_name }}! </span>
+                      </ng-template>
+                    </a>
+                </div>
+              </div>
+              <div class="widgets-left" fxLayout="row">
+
+                <div class="widget-text">
+                  <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/compare']" routerLinkActive="router-link-active" ><mat-icon>cached</mat-icon>COMPARE</a>
+                </div>
+                  <div class="widget-text" *ngIf="!isAuth; else profil">
+                    <a fxShow="false" fxShow.gt-xs [routerLink]="['/pages/signin']" routerLinkActive="router-link-active" ><mat-icon>person</mat-icon>Se connecter</a>
+                  </div>
+                  <ng-template #profil>
+                      <div class="widget-text">
+                          <a fxShow="false" fxShow.gt-xs [routerLink]="['/orhoda/user-profil']" routerLinkActive="router-link-active" ><mat-icon>person</mat-icon>{{user.username}}</a>
+                      </div>
+                  </ng-template>
+              </div>
+        </mat-toolbar-row>
+
+    </mat-toolbar>
+
+  <app-header *ngIf="url == '/home/one' || url == '/home/three' && url != '/home/two' && url != '/home/four' || router.url.includes('pages') || router.url.includes('products') || router.url.includes('blog') || router.url.includes('product')"></app-header>
+  <app-header-two *ngIf="url == '/home/two'  "></app-header-two>
+  <app-header-three *ngIf="url == '/home/four' || url == '/home/four'"></app-header-three>
+  <app-header-four *ngIf="url == '/home/five' || url == '/home/five'"></app-header-four>
+  <router-outlet></router-outlet>
+
+  <app-footer *ngIf="url != '/home/five'"></app-footer>
+  <app-footer-two *ngIf="url == '/home/five'"></app-footer-two>
+
+</mat-sidenav-container>

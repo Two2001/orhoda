@@ -1,0 +1,37 @@
+<div class="product-dialog">
+
+  
+    <div class="title">
+      <h3>Ajouter votre sologan</h3>
+    </div>
+    <div class="mt-5" class="register-body">
+      <form fxLayout="row wrap" (ngSubmit)="onSubmit(modiForm)" [formGroup]="modiForm">
+        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+          <span style="font-size: 1em"><b>Votre sologan:</b></span>
+          <mat-form-field class="w-100">
+              <input matInput placeholder="sologan"  formControlName="sologan" ngModel name="sologan">
+              <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="mt-3 mx-auto item-center" style="display: flex; justify-content: space-around; margin-top: 6px;">
+            <div style="float: left">
+                <button  class="btn" mat-raised-button color="accent" style="background-color:#A2D0F2 !important" type="submit">
+                    Ajouter
+                </button>
+            </div>
+            <div class="" style="float: right;">
+                <button  class="btn" mat-raised-button color="accent" style="background-color: red" (click)="close()">
+                    Fermer
+                </button>
+            </div>
+        </div>
+      </form>
+
+      
+  
+          
+  </div>
+  
+  
+  

@@ -1,0 +1,77 @@
+<div class="profil-dialog">
+
+    <!-- <div class="close-btn-outer">
+        <button mat-mini-fab color="warn" (click)="close()"><mat-icon>close</mat-icon></button>
+    </div> -->
+ 
+    <div class="title">
+        <h4>Catégories</h4>
+    </div>
+    
+    <div>
+       <div class="register-body" style="margin-top: 30px;">
+        <div fxFlex="100" fxFlex.gt-sm="100" class="left-info-panel loader" style="width:300px; height:300px">
+           <div *ngFor="let cat of categories" style="display: inline-block; margin-left: 2.5rem">
+            <h3>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted ">label_important</mat-icon><span style="margin-top: -2px;" class="ml-2 -mt-2" style="cursor: pointer;" (click)="redirection(cat.id)">{{ cat.name }}</span>
+            </h3>
+            <!-- <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div>
+            <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div>
+            <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div>
+            <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div>
+            <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div>
+            <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div>
+            <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div>
+            <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div>
+            <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div> -->
+            <!-- <div>
+                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted mt-2">label_important</mat-icon>
+                <span style="margin-top: -2px;" class="ml-2">hhdhhd</span>
+            </div> -->
+           </div> 
+         </div>
+       </div>
+    </div>
+
+    <div style="float: right" class="mt-3">
+        <button  class="btn btn-secondary" mat-raised-button color="accent" (click)="close()">
+            Fermer
+        </button>
+    </div>
+ </div>
+  
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 

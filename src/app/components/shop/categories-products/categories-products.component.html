@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<!-- <div class="form-wrap">
+    <input type="text" placeholder="Type to search...">
+    <button class="btn-search" type="submit">Search</button>
+ </div> -->
+ 
+
+<div @fade>
+    <div class="form-group col-6 mt-2 ">
+        <input type="text" class="form-control" style="text-decoration: none;" placeholder="Rechercher une catégorie..." [(ngModel)]="searchText">
+    </div>
+    
+    <div class="">
+        <div class="card mb-5 mt-3" style="width: 18rem; display: inline-block; margin-left: 6rem" *ngFor="let cat of showCategories | filter:searchText">
+            <img class="card-img-top" src="../../../../assets/images/alimentation.jpg" alt="Card image cap">
+            <div class="card-body text-center">
+                <h5 class="card-title">
+                    <a [class.first-item]="no-brd" [routerLink]="'/products/'+[cat.id]" style="text-decoration: none; " class="link">{{ cat.name }}</a>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-lg" style="width: 100%; background-color:#A2D0F2 !important" (click)="loadMore()">Voir plus</button>
+    </div>
+</div>
+
+
+<app-footer></app-footer>
+

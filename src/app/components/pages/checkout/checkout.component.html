@@ -1,0 +1,186 @@
+<div class="container">
+  <div class="checkout sec-padding">
+      <div fxLayout="row wrap" class="">
+          <div class="billing-details  pr-15" fxFlex="100" fxFlex.gt-md="100" fxFlex.md="100">
+            <div class="header-title">
+                <h2>Détails de la facturation</h2>
+            </div>
+
+              <form fxLayout="row wrap" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pr-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <input matInput placeholder="First name (optional)" value="{{user.first_name}}" formControlName="first_name" name="name">
+                          <!-- <mat-error *ngIf="name.invalid">Please enter a valid message</mat-error> -->
+                        </mat-form-field>
+                  </div>
+                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pl-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <input matInput placeholder="Last name (optional)" value="{{user.last_name}}" formControlName="last_name" name="last_name">
+                          <!-- <mat-error *ngIf="email.invalid">Please enter a valid message</mat-error> -->
+                        </mat-form-field>
+                  </div>
+                  <div  fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <input matInput placeholder="Company name (optional)" formControlName="subject" name="subject">
+                        </mat-form-field>
+                  </div>
+                  <div  fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <input matInput placeholder="Address (required)" value="{{user.address}}" formControlName="address" name="address" required>
+                          <!-- <mat-error *ngIf="address.invalid">Please enter a valid message</mat-error> -->
+                        </mat-form-field>
+                  </div>
+                  <div  fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <input matInput placeholder="Town/city" formControlName="city" name="town/city">
+                          <!-- <mat-error *ngIf="town.invalid">Please enter a valid message</mat-error> -->
+                        </mat-form-field>
+                  </div>
+                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pr-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <input matInput placeholder="State / Country (required)" formControlName="state" name="state" required>
+                          <!-- <mat-error *ngIf="state.invalid">Please enter a valid message</mat-error> -->
+                        </mat-form-field>
+                  </div>
+                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pl-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <input matInput placeholder="Postcode / zip (required)" formControlName="postcode" name="postcode" required>
+                          <!-- <mat-error *ngIf="postcode.invalid">Please enter a valid message</mat-error> -->
+                        </mat-form-field>
+                  </div>
+                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="mt-20 pr-5" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <input matInput placeholder="Email Address (required)" value="{{user.email}}" formControlName="email" name="email" required>
+                          <!-- <mat-error *ngIf="email.invalid">Please enter a valid message</mat-error> -->
+                        </mat-form-field>
+                  </div>
+                  <div  fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" class="pl-5 mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <input matInput placeholder="Phone (required)" value="{{user.phone}}" formControlName="phone" name="phone" required>
+                          <!-- <mat-error *ngIf="phone.invalid">Please enter a valid message</mat-error> -->
+                        </mat-form-field>
+                  </div>
+                  <div class="add-info">
+                    <h3>Informations complémentaires</h3>
+                    <p class="text-muted">Notes de commande (optional)</p>
+
+                  </div>
+                  <div  fxFlex="100" fxFlex.gt-sm="100" class="mt-20" ngClass.sm="mt-10" ngClass.xs="mt-10">
+                      <mat-form-field class="w-100">
+                          <textarea placeholder="Post content" matInput rows="4" formControlName="content" name="content"></textarea>
+                        </mat-form-field>
+                  </div>
+                  <div class="mainOrder-wrapper pl-15" fxFlex="100" fxFlex.gt-md="100" fxFlex.md="100">
+                    <div class="main-order " >
+                      <div class="order-box">
+                          <div class="title-box">
+                              <div>Product <span class="tl-amount"> Total</span></div>
+                          </div>
+                          <ul class="price-list" *ngIf='buyProducts.length'>
+                            <li *ngFor="let item of buyProducts">
+                               {{ item.product.name }} × {{ item.quantity }}
+                              <span>
+                               {{ item.product.price * item.quantity | currency:productService?.currency:'symbol' }}
+                                </span>
+                            </li>
+                        </ul>
+                        <ul class="quantity" *ngIf='buyProducts.length <= 0'>
+                          <li class="empty-checkout"> Il n'y a aucun produit dans le panier </li>
+                         </ul>
+                        <ul class="total-amount">
+                          <li>
+                            Sous-total <span class="amount">{{ getTotal() | async | currency:productService?.currency:'symbol'}}</span>
+                          </li>
+                          <li *ngIf='buyProducts.length'>
+                            Expédition
+                           <div class="shipping">
+                              <div class="shopping-option">
+                                <mat-radio-group>
+                                  <mat-radio-button *ngFor="let payment of payments" [value]="payment">{{payment}}</mat-radio-button>
+                                </mat-radio-group>
+                              </div>
+        
+                           </div>
+                          </li>
+                      </ul>
+                      <ul class="total">
+                        <li>Total <span class="count">{{ getTotal() | async | currency:productService?.currency:'symbol'}}</span></li>
+                    </ul>
+                    <!-- <div class="paymentFinal">
+                      <mat-radio-group>
+                        <mat-radio-button fxLayout="column" *ngFor="let payment of paymantWay" [value]="payment">{{payment}}</mat-radio-button>
+                      </mat-radio-group>
+                    </div> -->
+                    <!-- <div *ngIf="dataProduct"> -->
+                      <p style="font-size: 16px; color: tomato; margin-top: 12px; margin-bottom: 15px;">{{errorMessage}}</p><a [routerLink]="['/pages/cart']" style="background-color:#e78862 !important; margin-bottom: 20px;">{{retour}}</a>
+                      <!-- <button class="btn-project" mat-raised-button color="accent" [routerLink]="['/pages/cart']" style="background-color:#e78862 !important;  margin-bottom: 15px;">RETOUR</button> -->
+                    <!-- </div> -->
+                   
+                    <div class="order">
+                      <button class="btn-project" mat-raised-button color="accent" type="submit" (click)="sendPanier()" style="background-color:#A2D0F2 !important">CONFIRMER</button>
+                    </div>
+                       </div>
+                    </div>
+                  </div>
+                  <!-- <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                      <button class="btn-project" mat-raised-button color="accent" type="submit">Submit Review</button>
+                    </div> -->
+              </form>
+          </div>
+          
+          
+       </div>
+  </div>
+
+  <!-- <button id="pay-btn">Payer 1000 FCFA</button> -->
+
+  <!-- <button [fedaCheckoutOptions]="checkoutButtonOptions"> Click on me </button>
+
+<div [fedaCheckoutOptions]="checkoutEmbedOptions" [embeded]="true"
+  style="height : 500px; width: 500px; background-color: #eee">
+</div> -->
+
+
+
+  <div *ngIf="status == true">
+    <p style="text-align: center; margin-bottom: 15px; font-size: 20px; color: green;">Confirmation réussie. Veuillez passer à la caisse. Merci !</p><br>
+  
+    <div style="display: flex;
+    align-items: center;
+    justify-content: center;">
+      <input (click)="clicked()" type="radio" id="html" name="test" value="moov">
+      <label for="html" style="margin-left: 3px;">Flooz</label><br>
+      <input (click)="clicked()" type="radio" id="css" name="test" style="margin-left: 15px;" value="mtn">
+      <label for="css" style="margin-left: 3px;">Mobile Money</label><br>
+      <input (click)="clicked()" type="radio" id="javascript" name="test" style="margin-left: 15px;" value="moov_tg">
+      <label for="javascript" style="margin-left: 3px;">Moov Togo</label><br>
+      <input (click)="clicked()" type="radio" id="mtn_ci" name="test" style="margin-left: 15px;" value="mtn_ci">
+      <label for="mtn_ci" style="margin-left: 3px;">Mtn Côte d'ivoire</label><br>
+    </div>
+    <div class="order" style="display: flex;
+    align-items: center;
+    justify-content: center; margin-top: 15px;">
+      <div>
+        <button class="btn-project text-center" mat-raised-button color="accent" (click)="pay()" style="background-color:#A2D0F2 !important; text-align: center;">PAYER</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.2"></script>
+<script type="text/javascript">
+  FedaPay.init('#pay-btn', {
+    public_key: 'pk_sandbox_IuLQnMJPG7YMWaW6JLtoCKga',
+    transaction: {
+      amount: 1000,
+      description: 'Acheter mon produit'
+    },
+    customer: {
+      email: 'johndoe@gmail.com',
+      lastname: 'Doe',
+      firstname: 'John',
+    }
+  });
+</script>

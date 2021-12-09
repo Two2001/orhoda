@@ -1,0 +1,52 @@
+
+<div class="banners-container" fxLayout="column" fxLayout.gt-sm="row" *ngIf="banner.length > 0">
+
+  <div class="sec-padding" fxLayout="row" fxLayout.gt-sm="column" fxLayout.xs="column" fxFlex="100" fxFlex.gt-sm="100" class="baners">
+     <div class="baner first" [ngStyle]="{'background-image': 'url(' + getBg(0) + ')'}"  >
+       <div class="info">
+           <div class="text-box">
+               <h4 [ngStyle]="{'color': getBannerTextColor(0) }">{{getBanner(0).title}}</h4>
+               <p [ngStyle]="{'color': getBannerTextColor(0) }">{{getBanner(0).message}}</p>
+               <a href="#" [ngStyle]="{'color': getBannerTextColor(0) }">{{getBanner(0).actionName}}</a>
+           </div>
+       </div>
+     </div>
+   </div>
+
+   <div fxLayout="row" fxLayout.gt-sm="column" fxLayout.xs="column" fxFlex="100" fxFlex.gt-sm="60">
+       <div class="bn-wrap" fxLayout="column" fxLayout.gt-sm="row" fxFlexOrder="2" fxFlexOrder.gt-sm="1" fxFlex="50" fxFlex.gt-sm="33">
+           <div class="baner seccond" fxFlex [ngStyle]="{'background-image': 'url(' + getBg(1) + ')'}">
+               <div class="info" >
+                   <div class="text-box w-50" fxLayout="column" >
+                       <h4 [ngStyle]="{'color': getBannerTextColor(1) }">{{getBanner(1).title}}</h4>
+                      <p [ngStyle]="{'color': getBannerTextColor(1) }">{{getBanner(1).message}}</p>
+               <a href="#" [ngStyle]="{'color': getBannerTextColor(1) }">{{getBanner(0).actionName}}</a>
+                   </div>
+               </div>
+           </div>
+           <div class="baner seccond pd-xs" fxFlex [ngStyle]="{'background-image': 'url(' + getBg(2) + ')'}">
+               <div class="info" >
+                   <div class="text-box w-50" fxLayout="column" >
+                       <h4 [ngStyle]="{'color': getBannerTextColor(2) }">{{getBanner(2).title}}</h4>
+                      <p [ngStyle]="{'color': getBannerTextColor(2) }">{{getBanner(2).message}}</p>
+               <a href="#" [ngStyle]="{'color': getBannerTextColor(2) }">{{getBanner(0).actionName}}</a>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div class="baner seccond mg-xs-0" fxFlexOrder="1" fxFlexOrder.gt-sm="2" fxFlex="50" fxFlex.gt-sm="100" [ngStyle]="{'background-image': 'url(' + getBg(3) + ')'}">
+           <div class="info" >
+               <div class="text-box w-50 pt-40 " fxLayout="column" >
+                   <h4 [ngStyle]="{'color': getBannerTextColor(3) }" class="big-title">{{getBanner(3).title}}</h4>
+                  <p [ngStyle]="{'color': getBannerTextColor(3) }">{{getBanner(3).message}}</p>
+           <a href="#" [ngStyle]="{'color': getBannerTextColor(3) }" class="big-price">{{getBanner(0).actionName}}</a>
+               </div>
+           </div>
+       </div>
+   </div>
+ </div>
+
+ <!-- <div style="width: 600px; height: 600px; background-image: url(https://mdn.mozillademos.org/files/7693/catfront.png)">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut neque aspernatur, esse asperiores nulla facere sit temporibus accusamus eius repudiandae reprehenderit culpa deserunt dicta praesentium illo quae saepe maxime nostrum!</p>
+   </div> -->
+

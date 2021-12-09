@@ -1,0 +1,243 @@
+<div class="my-account sec-padding">
+    <div class="container">
+        <mat-card fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center"  class="p-2" style="margin-bottom: 15px;">
+            <div class="my-account-wrap p-0" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center" >
+                
+                <div class="register-wrapper pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
+                      <div class="title">
+                          <h3>Inscription</h3>
+                        </div>
+                        <div class="register-body">
+                          <p>Créez un nouveau compte dès aujourd'hui pour profiter des avantages d'une expérience d'achat personnalisée.</p>
+                          <form fxLayout="row wrap" [formGroup]="signUpForm" (ngSubmit)="onSubmit()" >
+
+                            <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                              <mat-form-field class="w-100">
+                                  <input matInput placeholder="Entrez votre nom" (keyup)="onKey($event)" name="first_name" formControlName="first_name" required>
+                                  <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                              </mat-form-field>
+                            </div>
+
+                            <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                              <mat-form-field class="w-100">
+                                  <input matInput placeholder="Entrez votre prénom" name="last_name" formControlName="last_name" required>
+                                  <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                              </mat-form-field>
+                            </div>
+
+                              <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                  <mat-form-field class="w-100">
+                                      <input matInput placeholder="Entrez votre adresse email" type="email" formControlName="email" name="email" required>
+                                      <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                                  </mat-form-field>
+                              </div>
+
+                              <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Entrer votre numéro de téléphone" name="phone" formControlName="phone" required>
+                                    <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                                </mat-form-field>
+                              </div>
+
+                              <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Entrer votre adresse" name="address" formControlName="address" required>
+                                    <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                                </mat-form-field>
+                              </div>
+
+                              <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Entrer votre date d'anniversaire" type="date" name="birthday" formControlName="birthday" required>
+                                    <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                                </mat-form-field>
+                              </div>
+
+                              <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Entrer votre numéro de série de votre carte d'identité" name="cni" formControlName="cni" required>
+                                    <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                                </mat-form-field>
+                              </div>
+
+                              <!-- <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                    <label for="roles" style="opacity: 0.5;">Choississez votre type de compte</label>
+                                    <select matInput name="roles" required style="box-decoration-break:inherit;" class="w-100 form-select form-select-sm" aria-label=".form-select-sm example">
+                                      <option value="utilisateur simple">Utilisateur simple</option>
+                                      <option value="vendeurs">Vendeurs</option>
+                                    </select>
+                              </div> -->
+
+                              <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Entrer votre mot de passe (au moins 6 caractères)" type="password" name="password" formControlName="password" required>
+                                    <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                                </mat-form-field>
+                              </div>
+
+                              <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Confirmer votre mot de passe (au moins 6 caractères)" type="password" name="password_confirm" formControlName="password_confirm" required>
+                                </mat-form-field>
+                                <p style="color: tomato" *ngIf="samePassword === false"> {{ errorMessagePassword }} </p>
+                              </div>
+
+                              <p style="color: tomato" class="mt-2" *ngIf="isSignup === false"> {{ errorMessage }} </p>
+
+                              <div *ngIf="isSignup === true" class="text-center mt-2">
+                                <p style="color: green"> {{ successMessage }} </p>
+                                <!-- <button class="btn btn-lg btn-outline-primary" data-toggle="modal" data-target="#myModal">Continuer</button> -->
+                              </div>
+                      
+  
+                              <p class="mt-2">Vos données personnelles seront utilisées pour soutenir votre expérience sur ce site Web, pour gérer l'accès à votre compte et à d'autres fins décrites dans notre politique de confidentialité.</p>
+                              <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                  <button class="btn-project" mat-raised-button color="accent" type="submit" [disabled]="signUpForm.invalid" style="background-color:#A2D0F2 !important">Register</button>
+                              </div>
+                              </form>
+                        </div>
+                </div>
+          </div>
+        </mat-card>
+
+       
+        <!-- <div *ngIf="!isSignup; then content else content2"></div> -->
+      
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Création de boutique</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body">
+                Voulez vous créer une boutique ?
+              </div>
+              
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" [routerLink]="['/shop']">Non</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" [routerLink]="['/orhoda/shop-form']">Oui</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+        <!-- <div>
+
+
+          <ng-template #errorModal let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title-error">Inscription</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Inscription non réussie, veuillez réessayer svp !</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Ok</button>
+            </div>
+          </ng-template>
+        </div> -->
+
+        <!-- <div>
+          <ng-template #content let-modal *ngIf="isSignup === true">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Inscription</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Inscription réussie, voulez vous créer une boutique ?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="modal.close('Save click')" [routerLink]="['/shop']">Non</button>
+              <button type="button" class="btn btn-success ml-2" [routerLink]="['/shop-form']">Oui</button>
+            </div>
+          </ng-template>
+        </div>
+         -->
+         <!-- <div *ngIf="!isSignin; then content else error"></div> -->
+        <!-- <ng-template #content let-modal  >
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Création de boutique</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p> Voulez vous créer une boutique ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modal.close('Save click')" [routerLink]="['/shop']">Non</button>
+            <button type="button" class="btn btn-success ml-2" (click)="modal.close('Save click')" [routerLink]="['/orhoda/shop-form']">Oui</button>
+          </div>
+        </ng-template> -->
+        <!-- <ng-template #error [ngIf]="!isSignin">fffffffffffffffffffff</ng-template> -->
+        <!-- <div class="container" *ngIf="!isSignin; then thenBlock else elseBlock"></div>
+
+        <ng-template #thenBlock>
+          <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+              
+               
+                <div class="modal-header">
+                  <h4 class="modal-title">Inscription</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+               
+                <div class="modal-body">
+                  Incription non réussie! Veuillez réessayer svp.
+                </div>
+                
+               
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template #elseBlock>
+          <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+              
+
+                <div class="modal-header">
+                  <h4 class="modal-title">Inscription</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+               
+                <div class="modal-body">
+                  Incription réussie! Voulez vous créer une boutique?
+                </div>
+                
+               
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" [routerLink]="['/shop']">Non</button>
+                  <button type="button" class="btn btn-success ml-2" data-dismiss="modal" [routerLink]="['/shop-form']">Oui</button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </ng-template> -->
+  
+    </div>
+  </div>
+  

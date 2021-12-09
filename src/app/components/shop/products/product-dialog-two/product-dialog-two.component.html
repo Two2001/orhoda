@@ -1,0 +1,25 @@
+<div class="delete-product-dialog">
+
+    <div class="close-btn-outer">
+      <button mat-mini-fab color="warn" (click)="close()"><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="title">
+      <h3>Suppression du produit</h3>
+    </div>
+    <div class="register-body">
+        <p>Vous êtes sur le point de supprimer ce produit. Voulez vous vraiment continuer?</p>
+    </div>
+    <div style="display: inline-block;">
+        <div style="float: left">
+            <button  class="btn" mat-raised-button color="accent" style="background-color: red" (click)="close()">
+                Non
+            </button>
+        </div>
+        <div style="float: right">
+            <button  class="btn" mat-raised-button color="accent" style="background-color: green" (click)="deleteProduct()">
+                Oui
+            </button>
+        </div>
+    </div>
+</div>
+  

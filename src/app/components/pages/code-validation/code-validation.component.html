@@ -1,0 +1,39 @@
+<div class="my-account sec-padding">
+    <div class="container">
+        <mat-card fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center"  class="p-0">
+            <div class="my-account-wrap p-0" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center" >
+                <div class="login-wrapper pr-100" fxFlex="100" fxFlex.gt-md="100" fxFlex.md="100">
+                    <div class="title">
+                      <h3>Récupération de mot de passe (validation de code)</h3>
+                    </div>
+                    <p style="font-size: 12px;">Vous avez reçu un mail contenant un code de validation à l'adresse précédement renseigné !</p>
+                    <form fxLayout="row wrap" [formGroup]="codeForm" (ngSubmit)="onSubmit()">
+                        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <mat-form-field class="w-100">
+                                <input matInput [disabled]="loading" placeholder="Code de validation" name="code" formControlName="code" required>
+                                <mat-error *ngIf="codeForm.invalid ">L'addresse mail saisie est incorrect</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <mat-form-field class="w-100">
+                                <input matInput [disabled]="loading" placeholder="Nouveau mot de passe" type="password" name="password" formControlName="password" required>
+                                <mat-error *ngIf="codeForm.invalid">Le mot de passe saisie est incorrect</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div  *ngIf="signinAlert" fxFlex="100" fxFlex.gt-sm="100" class="px-1 {{ signinAlert.type }}" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <p style="color: tomato; font-size: 12px; margin-bottom: 15px;">{{signinAlert.message}}</p>
+                        </div>
+
+                        <p style=" margin-bottom: 20px;" (click)="goToForgetPassword()">Vous recevrez un mail contenant un code à cette adresse code</p>
+
+                        <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <button class="btn-project" mat-raised-button color="accent" type="submit" style="background-color:#A2D0F2 !important">Envoyer</button>
+                            </div>
+                    </form>
+                </div>
+          </div>
+        </mat-card>
+  
+    </div>
+  </div>
+  

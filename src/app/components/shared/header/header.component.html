@@ -1,0 +1,48 @@
+
+<div class="home-header" style="background-color: #A2D0F2 !important;">
+  <div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="20px" fxlayoutalign="space-between center">
+    <div class="logo">
+        <a [routerLink]="['/orhoda/accueil']" routerLinkActive="router-link-active" ><img src="assets/images/orhoda.jpeg" height="95" width="95" alt="orhoda_logo"></a>
+
+    </div>
+    <div fxflexoffset.gt-sm="10"  fxFlex class="search-form">
+        <form class="search-form" fxLayout="row">
+          <div class="form-wrap">
+            <input
+              matInput
+              placeholder="Rechercher..."
+              (keyup.enter)="search()"
+              (change)="change($event)"
+            />
+             <input type="text" placeholder="Rechercher..." style="display: none;" (keydown.enter)="search()" id="search" (change)="change($event)">
+             <button class="btn-search" type="button" (click)="search()">Search</button>
+          </div>
+        </form>
+    </div>
+    <div class="call-bucket-wrap" fxLayout="row" fxLayout.sm="row" fxLayoutAlign="center center" >
+        <div class="info-message-icon"  fxLayout="row" fxLayoutAlign="center center">
+          <div class="icon"  fxLayout="row" >
+              <mat-icon class="mat-icon-lg mat-icon material-icons">call</mat-icon>
+          </div>
+            <div class="info-text">
+              <p>Helpline:</p>
+               <span>00229 61483323</span><br>
+               <div style="margin-top: 10px; display: inline-block;">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#" style="margin-left: 10px; color: green;"><i class="fa fa-whatsapp"></i></a>
+               </div>
+            </div>
+        </div>
+        <div class="main-menu-wrapper-2" fxLayout="row" fxLayoutAlign="space-between center" >
+            <mat-toolbar class="top-navbar top menu">
+              <app-shopping-widgets [shoppingCartItems]="shoppingCartItems" ></app-shopping-widgets>
+            </mat-toolbar>
+        </div>
+    </div>
+
+  </div>
+</div>
+<div class="menu-container1">
+    <app-menu></app-menu>
+</div>
+

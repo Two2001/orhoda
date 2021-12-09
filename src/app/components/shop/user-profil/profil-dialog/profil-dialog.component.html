@@ -1,0 +1,74 @@
+<div class="profil-dialog">
+
+    <div class="close-btn-outer">
+        <button mat-mini-fab color="warn" (click)="close()" style="float: right; margin-right: -25px; margin-top: -35px"><mat-icon>close</mat-icon></button>
+    </div>
+
+    <div class="title">
+        <h3>Modifier Votre profil</h3>
+    </div>
+    <div class="register-body">
+        <form fxLayout="row wrap" (ngSubmit)="onSubmit(modiForm)" [formGroup]="modiForm">
+            <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <span style="font-size: 1em"><b>Nom :</b> {{ user.first_name }}</span>
+                <mat-form-field class="w-100" style="margin-top: 8px;">
+                    <input matInput placeholder="Modifier votre nom"  formControlName="first_name" ngModel name="first_name" value="{{ user.first_name }}">
+                    <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <span style="font-size: 1em"><b>Prénom :</b> {{ user.last_name }}</span>
+                <mat-form-field class="w-100" style="margin-top: 8px;">
+                    <input matInput placeholder="Modifier votre prénom"  formControlName="last_name" ngModel name="last_name" value="{{ user.last_name }}">
+                    <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+                </mat-form-field>
+            </div>
+            <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <span style="font-size: 1em"><b>E-mail :</b> {{ user.email }}</span>
+                <mat-form-field class="w-100" style="margin-top: 8px;">
+                    <input matInput placeholder="Modifier votre adresse mail"  formControlName="email" ngModel name="email" value="{{ user.email }}">
+                    <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+                </mat-form-field>
+            </div>
+            <div  fxFlex="45" fxFlex.gt-sm="45" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <span style="font-size: 1em"><b>Téléphone :</b> {{ user.phone }}</span>
+                <mat-form-field class="w-100" style="margin-top: 8px;">
+                    <input matInput placeholder="Modifier votre adresse phone"  formControlName="phone" ngModel name="phone" value="{{ user.phone }}">
+                    <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div  fxFlex="45" fxFlex.gt-sm="45" style="margin-left: 45px;" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <span style="font-size: 1em"><b>Numéro de pièce d'identité :</b> <span style="font-size: 0.7em">{{ user.cni }}</span></span>
+                <mat-form-field class="w-100" style="margin-top: 8px;">
+                    <input matInput placeholder="Modifier votre numéro de pièce d'identité"  formControlName="cni" ngModel name="cni" value="{{ user.cni }}">
+                    <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div  fxFlex="45" fxFlex.gt-sm="45" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <span style="font-size: 1em"><b>Date de naissance :</b> {{ user.birthday}}</span>
+                <!-- <span style="font-size: 1em"><b>Date de naissance :</b> {{ user.birthday.timestamp * 1000 | date: 'dd/MM/yyyy' }}</span> -->
+                <mat-form-field class="w-100" style="margin-top: 8px;">
+                    <input matInput placeholder="Modifier votre date de naissance" type="date"  formControlName="birthday" ngModel value="{{ user.birthday.timestamp * 1000 | date: 'dd/MM/yyyy' }}">
+                    <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div  fxFlex="45" fxFlex.gt-sm="45" style="margin-left: 45px;" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <span style="font-size: 1em"><b>Adresse :</b> {{ user.address }}</span>
+                <mat-form-field class="w-100" style="margin-top: 8px;">
+                    <input matInput placeholder="Modifier votre adresse "  formControlName="address" ngModel value="{{ user.address }}">
+                    <mat-error *ngIf="modiForm.invalid">Veuillez saisir un message valide</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="button-wrap mt-5" fxFlex="50" fxFlex.gt-sm="50" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <button class="btn-project" mat-raised-button color="accent" type="submit" style="background-color:#A2D0F2 !important">Modifier</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

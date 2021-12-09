@@ -1,0 +1,65 @@
+<app-header></app-header>
+
+<div class="my-account sec-padding">
+    <div class="container">
+        <mat-card fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center"  class="p-2" style="margin-bottom: 15px;">
+            <div class="my-account-wrap p-0" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center" >
+                
+                <div class="register-wrapper pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50">
+                      <div class="title">
+                          <h3>Création de boutique</h3>
+                        </div>
+                        <div class="register-body">
+                          <p>Créez une nouvelle boutique dès aujourd'hui pour profiter des avantages d'une expérience de vente personnalisée.</p>
+                          <form fxLayout="row wrap" [formGroup]="shopForm" (ngSubmit)="onSubmit()" >
+                            <p style="color: tomato" *ngIf="isCreated === false"> {{ errorMessage }} </p>
+                            <p style="color: green" *ngIf="isCreated === true"> {{ successMessage }} </p>
+                            <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                              <mat-form-field class="w-100">
+                                  <input matInput placeholder="Entrez le nom de la boutique" formControlName="name" name="name" required>
+                                  <mat-error *ngIf="shopForm.invalid">Le nom de la boutique est incorrect</mat-error>
+                              </mat-form-field>
+                            </div>
+
+                            <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                              <mat-form-field class="w-100">
+                                  <input matInput placeholder="Entrez votre régistre de commerce" name="rrcm" formControlName="rrcm" required>
+                                  <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                              </mat-form-field>
+                            </div>
+
+                              <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                  <mat-form-field class="w-100">
+                                      <input matInput placeholder="Entrez l'adresse email de la boutique" type="email" formControlName="email" name="email" required>
+                                      <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                                  </mat-form-field>
+                              </div>
+
+                              <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Entrer votre numéro de téléphone" name="phone" formControlName="phone" required>
+                                    <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                                </mat-form-field>
+                              </div>
+
+                              <div fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Entrer votre adresse" name="address" formControlName="address" required>
+                                    <!-- <mat-error *ngIf="name.invalid">Veuillez saisir un message valide</mat-error> -->
+                                </mat-form-field>
+                              </div>
+                              <p style="color: tomato" *ngIf="isCreated === false"> {{ errorMessage }} </p>
+                              <p style="color: green" *ngIf="isCreated === true"> {{ successMessage }} </p>
+                              <p>Vos données personnelles seront utilisées pour soutenir votre expérience sur ce site Web, pour gérer l'accès à votre boutique et à d'autres fins décrites dans notre politique de confidentialité.</p>
+                              <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                                  <button class="btn-project" mat-raised-button color="accent" type="submit" style="background-color:#A2D0F2 !important">Créer</button>
+                                </div>
+                              </form>
+                        </div>
+                </div>
+          </div>
+        </mat-card>
+  
+    </div>
+</div>
+  

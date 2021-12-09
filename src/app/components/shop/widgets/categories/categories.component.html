@@ -1,0 +1,28 @@
+
+<style>
+    a:hover {
+        background-color: #F5F5F5;
+    }
+</style>
+
+<div fxFlex="100" fxFlex.lt-sm="100" class="filter-sidenav" perfectScrollbar>
+    <div class="toggles-wrapper" fxLayout="column" fxLayout.lt-md="column">
+        <div class="toggles" fxFlex.lt-md="100">
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let cat of categories | slice:0:8;">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                            <li><a [class.first-item]="no-brd" style="cursor: pointer;" (click)="redirection(cat.id)">{{ cat.name }}</a></li>                      
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="brands" *ngFor="let subcat of cat.sub_categories">
+                        <li><a [class.first-item]="no-brd" style="cursor: pointer; width: 100%;" (click)="redirection(subcat.id)">{{ subcat.name }}</a></li>                      
+                     </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+  
+

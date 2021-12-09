@@ -1,0 +1,140 @@
+<div class="product-item"  >
+  <mat-card fxLayout="column">
+    <div class="product-img">
+        <a class="product-link" [routerLink]="['/home/product', product.id]">
+          <!-- <img [src]="products.pictures[0].big" alt=""> -->
+       </a>
+    </div>
+     <div class="product-info-wrapper">
+        <span class="category">{{product.category.name}}</span>
+        <div class="title-wrap">
+           <h4>{{product.name}}</h4>
+        </div>
+        <div class="stars">
+           <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+           <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+           <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+           <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+           <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+        </div>
+        <div class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+         <p>{{products.price | currency:productsService?.currency:'symbol'}}</p>
+        <a (click)="addToCart(product)"><mat-icon class="mat-icon-lg mat-icon material-icons">shopping_cart</mat-icon></a>
+        </div>
+        <div class="icons" fxLayout="column">
+           <a (click)="addToWishlist(product)"><mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon></a>
+           <a (click)="openProductDialog(product)"><mat-icon>remove_red_eye</mat-icon></a>
+           <a (click)="addToCompare(product)"><mat-icon>cached</mat-icon></a>
+         </div>
+     </div>
+  </mat-card>
+</div>
+
+<style>
+   .image-wrap {
+       padding: 10px;
+       border: solid 1px #e0e0e0;
+       display: inline-block;
+   }
+
+   .img-space {
+       border: dashed 1px #d3d3d3;
+       border-radius: 8px;
+       background-color: #f2f2f2;
+       height: auto;
+       /*width: 100%;*/
+       /*padding: 10px;*/
+       /*min-height:175px;*/
+   }
+
+   .img-space img {
+       display: block;
+       width: 100%;
+       height: 100%;
+       margin: auto;
+       cursor: pointer;
+   }
+
+   .fileInputProfileWrap {
+       width: 100%;
+       height: auto;
+   }
+
+   .fileInputProfile {
+       position: absolute;
+       height: 100%;
+       width: 100%;
+       z-index: 99;
+       opacity: 0;
+   }
+   .fileInputProfile[disabled] + .img-space{
+       pointer-events: none;
+       cursor: not-allowed!important;
+   }
+</style>
+<app-header></app-header>
+<div class="container">
+   <div class="banner banner1" style="width: 90% !important; background-color: #FDE4B4 !important" >
+       <h2>{{shop.name}}</h2>
+       <p class="slogan" style="margin-top: 18px !important" *ngIf="shop.slogan;else addSlogan">{{ shop.slogan}}</p>
+       <ng-template #addSlogan>
+           <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px">Ajouter un slogan</button>
+       </ng-template >
+       <div style="float: right !important;">
+           <p *ngIf="countProduct == 0;else addProduct"> Vous n'avez aucun produit         <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" (click)="goToAddForm()">Ajouter un produit</button>
+           </p>
+           <ng-template #addProduct>
+               <p> Vous avez {{ countProduct }} produit(s)         <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px" (click)="goToAddForm()">Ajouter un produit</button>
+               </p>
+           </ng-template >
+       </div>
+   </div>
+
+   <div class="col-sm-12 empty-cart-cls text-center" *ngIf="countProduct == 0">
+       <img src="assets/images/backet-01.png" class="img-fluid mb-4" >
+       <h3 class="mb-5"><strong>Votre boutique est vide</strong></h3>
+       <h4>Ajouter des produits à votre boutique.</h4>
+   </div>
+   <!-- <div class="blog-container" fxLayout="column" fxLayout.gt-sm="row" *ngFor="let line of productLine">
+       <div class="product-item"  *ngFor="let p of line" style="margin:10px !important;width: 100%">
+           <mat-card fxLayout="column">
+               <form *ngIf="p.images.length == 0;">
+                   <div class="custom-file fileInputProfileWrap">
+                       <div class="img-space">
+                           <button  class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px">
+                           <input type="file" (change)="imageChangeEvent($event, p)" name="image" class="fileInputProfile" >
+                               Ajouter
+                               <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">image</mat-icon>
+                           </button>
+                       </div>
+                   </div>
+               </form>
+               <div class="product-img" *ngIf="p.images.length > 0" style="max-height: 300px;overflow-y: hidden">
+                   <img [src]="p.images[0].image64" alt="{{p.name}}" style="max-width: 300px">
+               </div>
+               <div class="product-info-wrapper">
+                   <span class="category">{{p.category.name}}</span>
+                   <div class="title-wrap">
+                       <h4>{{p.name}}</h4>
+                   </div>
+                   <div class="stars">
+                       <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+                       <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+                       <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+                       <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">star_rate</mat-icon>
+                       <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: darkorange">star_rate</mat-icon>
+                   </div>
+                  <div class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+                       <p>{{p.price}} {{currency}}</p>
+                       <a (click)="addToCart(p)"><mat-icon class="mat-icon-lg mat-icon material-icons">shopping_cart</mat-icon></a>
+                   </div>
+                   <div class="icons" fxLayout="column">
+                       <a (click)="addToWishlist(p)"><mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon></a>
+                       <a (click)="openProductDialog(p)"><mat-icon>remove_red_eye</mat-icon></a>
+                       <a ><mat-icon>cached</mat-icon></a>
+                   </div>
+               </div>
+           </mat-card>
+       </div>
+   </div>
+</div> -->

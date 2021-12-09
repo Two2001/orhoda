@@ -1,0 +1,132 @@
+<app-header></app-header>
+
+<div class="left-sidebar-wrapper sec-padding">
+<div class="container">
+  <div class="sidebar-wrapper" fxLayout='row' fxLayout.lt-md="column" >
+      <div fxFlex="25" fxFlex.lt-sm="100" class="filter-sidenav" perfectScrollbar>
+          <div class="toggles-wrapper" fxLayout="column" fxLayout.lt-md="column">
+              <div class="toggles" fxFlex.lt-md="100">
+                  <mat-accordion>
+                      <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                              <span>Categories</span>
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                    <app-categories></app-categories>
+                      </mat-expansion-panel>
+                      <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span>Brands</span>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+
+                          <div class="brands">
+                             <app-brands (brandChanged)="onBrendsChanged($event)"></app-brands>
+                           </div>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                  <span>Price</span>
+                              </mat-panel-title>
+                            </mat-expansion-panel-header>
+
+                            <app-price (priceFilters)="updatePriceFilters($event)"></app-price>
+                          </mat-expansion-panel>
+                    </mat-accordion>
+              </div>
+                  <div class="popular-products" fxFlex.lt-md="100">
+                    <app-popular-products></app-popular-products>
+                  </div>
+          </div>
+
+          
+        
+      </div>
+        <div fxFlex="75" fxFlex.lt-sm="100" class="all-products" ngClass.gt-sm="p-left">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxHide.lt-md="true" class="filter-row mat-elevation-z1 text-muted">
+                <button *ngIf="!sidenavOpen" mat-icon-button (click)="sidenav.toggle()">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <div >
+                    <select (change)="onChangeSorting($event.target.value)">
+                        <option value="asc">Sorting items</option>
+                        <option value="asc">Ascending Order</option>
+                        <option value="desc">Descending Order</option>
+                        <option value="a-z">Alphabetically, A-Z</option>
+                        <option value="z-a">Alphabetically, Z-A</option>
+                        <option value="low">Price, low to high</option>
+                        <option value="high">Price, high to low</option>
+                      </select>
+
+                </div>
+                <div>
+
+                    <button mat-icon-button (click)="changeViewType('list', 100)">
+                        <mat-icon>view_list</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="changeViewType('list', 33.3)">
+                        <mat-icon>view_module</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="changeViewType('list', 25)">
+                        <mat-icon>view_comfy</mat-icon>
+                    </button>
+                </div>
+              </div>
+              <div fxLayout="row wrap" class="products-wrapper">
+                  <div *ngFor="let product of productsResults | orderBy:sortByOrder | paginate: { itemsPerPage: 12, currentPage: page  }" fxFlex="100" [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="col">
+                     <div class="product-box">
+                        <div class="product-item"  >
+                            <mat-card fxLayout="column">
+                              <!-- <div class="product-img">
+                                  <a class="product-link" [routerLink]="['/home/product', product.id]">
+                                    <img [src]="product.pictures[0].big" alt="">
+                                 </a>
+                              </div> -->
+                               <div class="product-info-wrapper">
+                                  <!-- <span class="category">{{product.category}}</span> -->
+                                  <div class="title-wrap">
+                                     <h4>{{product.name}}</h4>
+                                  </div>
+                                  <div class="stars" *ngIf="product.rating.length == 0">
+                                    <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                                    <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                                    <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                                    <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                                    <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                                 </div>
+                                   <div class="stars" *ngIf="product.rating.length > 0">
+                                      <mat-icon *ngFor="let rate of product.rating" class="mat-icon-xs mat-icon material-icons ng-star-inserted">{{rate}}</mat-icon>
+                                   </div>  
+                                  <div class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+                                   <p>{{product.price | currency:productsService?.currency:'symbol'}}</p>
+                                  <a (click)="addToCart(product)"><mat-icon class="mat-icon-lg mat-icon material-icons">shopping_cart</mat-icon></a>
+                                  </div>
+                                  <div class="icons" fxLayout="column">
+                                     <a (click)="addToWishlist(product)"><mat-icon class="mat-icon-lg mat-icon material-icons mr-10">favorite_border</mat-icon></a>
+                                     <a (click)="openProductDialog(product)"><mat-icon>remove_red_eye</mat-icon></a>
+                                     <a (click)="addToCompare(product)"><mat-icon>cached</mat-icon></a>
+                                   </div>
+                               </div>
+                            </mat-card>
+                          </div>                        
+                        <!-- <app-product-grid [productsResults]="productsResults"></app-product-grid> -->
+                     </div>
+                  </div>
+              </div>
+
+              <div *ngIf="products.length > 0" fxLayout="row wrap ">
+                  <div fxFlex="100">
+                      <mat-card class="p-0 text-center no-shadow">
+                          <pagination-controls class="product-pagination" autoHide="true" maxSize="5" (pageChange)="onPageChanged($event)"></pagination-controls>
+                      </mat-card>
+                  </div>
+              </div>
+            </div>
+  </div>
+</div>
+</div>
+
+<app-footer></app-footer>

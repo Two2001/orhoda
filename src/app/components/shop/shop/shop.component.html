@@ -1,0 +1,187 @@
+<style>
+    .image-wrap {
+        padding: 10px;
+        border: solid 1px #e0e0e0;
+        display: inline-block;
+    }
+
+    .img-space {
+        border: dashed 1px #d3d3d3;
+        border-radius: 8px;
+        background-color: #f2f2f2;
+        height: auto;
+        /*width: 100%;*/
+        /*padding: 10px;*/
+        /*min-height:175px;*/
+    }
+
+    .img-space img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        cursor: pointer;
+    }
+
+    .fileInputProfileWrap {
+        width: 100%;
+        height: auto;
+    }
+
+    .fileInputProfile {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 99;
+        opacity: 0;
+    }
+    .fileInputProfile[disabled] + .img-space{
+        pointer-events: none;
+        cursor: not-allowed!important;
+    }
+
+    
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    
+    .contain:hover .blog {
+        opacity: 0.3;
+    }
+    
+    .contain:hover .middle {
+        opacity: 1;
+    }
+    @media only screen and (max-width: 1440px) {
+        .button-text {
+           display: none;
+        }
+    }
+</style>
+<app-header></app-header>
+<div>
+<div fxFlex="100" fxFlex.sm="60" fxFlex.gt-sm="85" class="main-blog-panel"  style="margin: auto !important;">
+    <!-- <p>isActived:  {{shop.isActived}} </p> -->
+    
+    <div *ngIf="shop.is_active == true;then show else hide"></div>
+
+    <ng-template #show>
+        <div class="banner banner1" style="width: 90% !important; background-color: white !important" >
+            <h2>{{shop.name}}</h2>
+            <p class="slogan" style="margin-top: 18px !important" *ngIf="shop.slogan;else addSlogan">{{ shop.slogan}}</p>
+            <ng-template #addSlogan>
+                <button class="btn-project" mat-raised-button color="accent" (click)="openSologanModal(shop)" style="background-color:#A2D0F2 !important" style="margin: 5px;padding: 5px; background-color:#A2D0F2 !important">Ajouter un slogan</button>
+            </ng-template >
+            <div style="float: right !important;margin-top: -18px;">
+                <p *ngIf="countProduct == 0;else addProduct"> Vous n'avez aucun produit         <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px; background-color:#A2D0F2 !important" (click)="goToAddForm()">Ajouter un produit</button>
+                </p>
+                <ng-template #addProduct>
+                    <p> Vous avez {{ countProduct }} produit(s)         <button class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px; background-color:#A2D0F2 !important" (click)="goToAddForm()">Ajouter un produit</button>
+                    </p>
+                </ng-template >
+            </div>
+        </div>
+    
+        <div class="col-sm-12 empty-cart-cls text-center" *ngIf="countProduct == 0">
+            <img src="assets/images/backet-01.png" class="img-fluid mb-4" >
+            <h3 class="mb-5"><strong>Votre boutique est vide</strong></h3>
+            <h4>Ajouter des produits à votre boutique.</h4>
+        </div>
+    
+       <div>
+            <div class="blog-container" fxLayout.gt-sm="row" *ngFor="let line of productLine ">
+                <div class="product-item contain"  *ngFor="let p of line " style="margin:10px !important;width: 25% !important">
+                    <mat-card fxLayout="column" *ngIf="p != null">
+                        <form *ngIf="p.photos == null;">
+                            <div class="custom-file fileInputProfileWrap">
+                                <div class="img-space" style="height: 250px;background-image:url(assets/images/product-no-img.png);">
+                                    <button  class="btn-project" mat-raised-button color="accent" style="margin: 5px;padding: 5px; background-color:#A2D0F2 !important">
+                                    <input type="file" (change)="imageChangeEvent($event, p)" name="image" class="fileInputProfile" >
+                                        Ajouter
+                                        <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">image</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="product-img blog" *ngIf="p.photos != null" style="height: 300px;overflow-y: hidden">
+                            <img [src]="'http://192.168.1.110:8000/' + p.photos.file_name" alt="{{p.name}}" style="width: 100%; height: 90%">
+                        </div>
+
+                        <div class="product-info-wrapper">
+
+                            <div class="middle">
+                                <div class="add-button" style="display: flex;justify-content: center;margin-left: 2rem; margin-top: -3rem">
+                                    <a (click)="addToCart(p)"><mat-icon class="mat-icon-lg mat-icon material-icons add-icon" style="cursor: pointer;" >shopping_cart</mat-icon></a>
+                                    <a (click)="openProductDetailDialog(p, id)"><mat-icon style="cursor: pointer;">remove_red_eye</mat-icon></a>
+                                    <a ><input type="file" (change)="imageUpdateChangeEvent($event, p)" name="image"  class="" style="position: absolute; width: 20px;opacity: 0;" >
+                                    <mat-icon style="margin-top: 3px;cursor: pointer;" class="mat-icon-xs mat-icon material-icons ng-star-inserted">image</mat-icon></a>
+                                </div>
+                            </div>
+
+                            <!-- <span class="category">{{p.category[0].name}}</span> -->
+                            <div class="title-wrap">
+                                <h4>{{p.name}}</h4>
+                            </div>
+                            <div class="stars" *ngIf="p.rating.length == 0">
+                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted" style="color: gray;">star_rate</mat-icon>
+                             </div>
+                               <div class="stars" *ngIf="p.rating.length > 0">
+                                  <mat-icon *ngFor="let rate of p.rating" class="mat-icon-xs mat-icon material-icons ng-star-inserted">{{rate}}</mat-icon>
+                               </div>  
+                            
+                            <div class="price-wrap" fxLayout="row" fxLayoutAlign="space-between center">
+                                <p>{{p.price}} {{currency}}</p>
+                            </div>
+                            <div class="icons" fxLayout="column" style="margin-top: 5px">
+                                <div style="display: inline-block;">
+                                    <div style="float: left">
+                                        <button  class="btn" mat-raised-button color="accent" style="background-color: #2F8496" (click)="openProductDialog(p, id)">
+                                            <span class="button-text">Modifier</span>
+                                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">create</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div style="float: right">
+                                        <button  class="btn" mat-raised-button color="accent" style="background-color: red" (click)="openDeleteProductDialog(p, id)">
+                                            <span class="button-text">Supprimer</span>
+                                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted">delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </mat-card>
+                </div>
+            </div>
+       </div>
+    
+    
+        <div style="display: flex;justify-content: center; margin-top: 2rem; margin-bottom:18px">
+            <div class="pagination">
+                <a (click)="previousPage()"  style="cursor:default">&laquo;</a>
+                <a *ngFor="let p of countPage; let i = index;" (click)="showpProductsPage(i + 1)">
+                    <b style="cursor:default" [ngStyle]="{'color': i+1 === currentPage ? 'orange' : 'black' }">{{i + 1}}</b>
+                </a>
+                <a (click)="nextPage()"  style="cursor:default">&raquo;</a>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #hide >
+        <div style="margin-top: 40px; text-align: center; margin-bottom: 40px">
+            <p><b style="font-size: 28px;">Votre boutique est désactivée !</b></p>
+        </div>
+    </ng-template>
+
+</div>
